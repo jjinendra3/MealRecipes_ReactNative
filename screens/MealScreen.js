@@ -16,12 +16,21 @@ const MealScreen = ({ route, navigation }) => {
     //MEALS already written so element is a specific item in the MEALS array
     return element.categoryIds.indexOf(id) >= 0;
   });
+  const presshandler = (item) => {
+    navigation.navigate("Recipe", { detail: item });
+  };
   return (
     <View style={{ flex: 1, padding: 16 }}>
       <FlatList
         data={displayeditems}
         renderItem={(element) => {
-          return <MealItem item={element.item} key={element.item.id} />;
+          return (
+            <MealItem
+              item={element.item}
+              key={element.item.id}
+              onPress={() => presshandler(element.item)}
+            />
+          );
         }}
       />
     </View>

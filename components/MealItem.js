@@ -2,12 +2,13 @@ import { View, Text, Pressable, Image, StyleSheet } from "react-native";
 import React from "react";
 import { Ionicons } from "@expo/vector-icons";
 import { FontAwesome } from "@expo/vector-icons";
-export default function MealItem({ item }) {
+export default function MealItem({ item, onPress }) {
   return (
     <View style={styles.container}>
       <Pressable
         style={{ flex: 1, borderRadius: 8, overflow: "hidden" }}
         android_ripple={{ color: "grey" }}
+        onPress={onPress}
       >
         <View style={{ borderRadius: 20, flex: 1 }}>
           <Image source={{ uri: item.imageUrl }} style={styles.image} />

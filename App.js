@@ -4,6 +4,7 @@ import { NavigationContainer } from "@react-navigation/native";
 import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import Categories from "./screens/Categories";
 import MealScreen from "./screens/MealScreen";
+import Recipe from "./screens/Recipe";
 const Stack = createNativeStackNavigator();
 export default function App() {
   return (
@@ -23,18 +24,8 @@ export default function App() {
             component={Categories}
             options={{ title: "MealRecipes" }}
           />
-          <Stack.Screen
-            name="MealScreen"
-            component={MealScreen}
-            // options={({route,navigation})=>{//route and navigation of the meal screen can be used here so any app wide state can be performed through this, commented because a better aleternative is done MealScreen.js
-            //   const id=route.params.title;
-            //   return(
-            //     {
-            //       title:id
-            //     }
-            //   )
-            // }}
-          />
+          <Stack.Screen name="MealScreen" component={MealScreen} />
+          <Stack.Screen name="Recipe" component={Recipe} />
         </Stack.Navigator>
       </NavigationContainer>
     </View>
