@@ -8,6 +8,7 @@ import MealScreen from "./screens/MealScreen";
 import Recipe from "./screens/Recipe";
 import Favourites from "./screens/Favourites";
 import { Ionicons } from "@expo/vector-icons";
+import FavouritesContextProvider from "./data/fav-context";
 const Stack = createNativeStackNavigator();
 const Drawer = createDrawerNavigator();
 const DrawerNav = () => {
@@ -52,26 +53,28 @@ export default function App() {
   return (
     <View style={{ flex: 1 }}>
       <StatusBar style="light" />
-      <NavigationContainer>
-        <Stack.Navigator
-          initialRouteName="Categories"
-          screenOptions={{
-            headerStyle: { backgroundColor: "#24180f" },
-            headerTintColor: "white",
-            contentStyle: { backgroundColor: "#24180f" },
-            headerShadowVisible: false,
-            headerTitleAlign: "center",
-          }}
-        >
-          <Stack.Screen
-            name="Categories"
-            component={DrawerNav}
-            options={{ headerShown: false }}
-          />
-          <Stack.Screen name="MealScreen" component={MealScreen} />
-          <Stack.Screen name="Recipe" component={Recipe} />
-        </Stack.Navigator>
-      </NavigationContainer>
+      <FavouritesContextProvider>
+        <NavigationContainer>
+          <Stack.Navigator
+            initialRouteName="Categories"
+            screenOptions={{
+              headerStyle: { backgroundColor: "#24180f" },
+              headerTintColor: "white",
+              contentStyle: { backgroundColor: "#24180f" },
+              headerShadowVisible: false,
+              headerTitleAlign: "center",
+            }}
+          >
+            <Stack.Screen
+              name="Categories"
+              component={DrawerNav}
+              options={{ headerShown: false }}
+            />
+            <Stack.Screen name="MealScreen" component={MealScreen} />
+            <Stack.Screen name="Recipe" component={Recipe} />
+          </Stack.Navigator>
+        </NavigationContainer>
+      </FavouritesContextProvider>
     </View>
   );
 }

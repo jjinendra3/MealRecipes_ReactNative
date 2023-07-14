@@ -1,4 +1,4 @@
-import { View, Text, FlatList } from "react-native";
+import { View, FlatList } from "react-native";
 import React, { useLayoutEffect } from "react";
 import { MEALS } from "../dummy-data";
 import { CATEGORIES } from "../dummy-data";

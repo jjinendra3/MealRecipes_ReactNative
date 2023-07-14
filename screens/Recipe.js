@@ -1,7 +1,7 @@
 import { View, Text, StyleSheet, Image, ScrollView } from "react-native";
-import React, { useLayoutEffect } from "react";
-import { MEALS } from "../dummy-data";
+import React, { useEffect, useContext } from "react";
 import { Entypo, Ionicons, FontAwesome } from "@expo/vector-icons";
+import { FavouritesContext } from "../data/fav-context";
 const Recipe = ({ route, navigation }) => {
   const {
     affordability,
@@ -18,9 +18,30 @@ const Recipe = ({ route, navigation }) => {
     steps,
     title,
   } = route.params.detail;
-  useLayoutEffect(() => {
-    navigation.setOptions({ title: title });
-  }, [navigation]);
+  const favouriteMealsCtx = useContext(FavouritesContext);
+  const mealIsfavourite = favouriteMealsCtx.ids.includes(id);
+  const changefavourite = () => {
+    if (mealIsfavourite) {
+      favouriteMealsCtx.removeFavourite(id);
+    } else {
+      favouriteMealsCtx.addFavourite(id);
+    }
+  };
+  useEffect(() => {
+    navigation.setOptions({
+      title: title,
+      headerRight: () => {
+        return (
+          <Ionicons
+            name={mealIsfavourite ? "star" : "star-outline"}
+            color="white"
+            size={24}
+            onPress={changefavourite}
+          />
+        );
+      },
+    });
+  }, [navigation, mealIsfavourite]);
   return (
     <ScrollView>
       <View style={styles.container}>
